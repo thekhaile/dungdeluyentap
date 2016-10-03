@@ -129,6 +129,7 @@ class SwagSearch(unittest.TestCase):
             self.dismiss_swagButton_modal()
         self.navigate_to_search()
         for keyword in keywords[:4]:
+            print keyword
             self.search(keyword)
             sleep(self.search_break())
             self.driver.back()
