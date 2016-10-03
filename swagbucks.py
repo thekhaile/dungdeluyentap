@@ -49,12 +49,24 @@ class SwagSearch(unittest.TestCase):
 
     def navigate_to_search(self):
         sleep(5)
+        try:
+            el = self.driver.find_element(By.XPATH, '//*[@class="sbCta" and @id="sbMainNavToggle"]')
+            el.click()
+            sleep(5)
+        except:
+            pass
         el = self.driver.find_element(By.XPATH, '//*[@class="sbMainNavSectionListCta" and text()="Search"]')
         el.click()
         sleep(5)
 
     def navigate_to_watch(self):
         sleep(5)
+        try:
+            el = self.driver.find_element(By.XPATH, '//*[@class="sbCta" and @id="sbMainNavToggle"]')
+            el.click()
+            sleep(5)
+        except:
+            pass
         el = self.driver.find_element(By.XPATH, '//*[@class="sbMainNavSectionListCta" and text()="Watch"]')
         el.click()
         sleep(5)
