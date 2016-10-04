@@ -64,7 +64,9 @@ class InstacgVideo(unittest.TestCase):
         self.driver.switch_to_default_content()
         try:
             el = self.driver.find_element(By.XPATH, '//*[@class="issue" and text()="Playlist has ended. Please refresh to start over."]')
+            sleep(3)
             self.driver.get('https://www.instagc.com/watch/')
+            sleep(5)
         except:
             pass
 
@@ -80,7 +82,7 @@ class InstacgVideo(unittest.TestCase):
 
     def tearDown(self):
         try:
-            self.driver.save_screenshot('/test1.png')
+            self.driver.save_screenshot('./'+str(self.id())+'.png')
         except:
             pass
         finally:
