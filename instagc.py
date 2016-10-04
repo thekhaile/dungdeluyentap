@@ -64,7 +64,7 @@ class Instacg(unittest.TestCase):
         self.driver.switch_to_default_content()
         try:
             el = self.driver.find_element(By.XPATH, '//*[@class="issue" and text()="Playlist has ended. Please refresh to start over."]')
-            self.navigate_to_videos()
+            self.driver.get('https://www.instagc.com/watch/')
         except:
             pass
 
