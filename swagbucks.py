@@ -128,7 +128,7 @@ class SwagSearch(unittest.TestCase):
         if self.is_swagButton_modal_present():
             self.dismiss_swagButton_modal()
         self.navigate_to_search()
-        for keyword in keywords[:4]:
+        for keyword in keywords[:20]:
             print keyword
             self.search(keyword)
             sleep(self.search_break())
