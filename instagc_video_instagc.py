@@ -9,7 +9,7 @@ from time import sleep
 class InstacgInstaGCVideo(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Firefox()
         self.driver.get('https://www.instagc.com/users/login')
         self.email = 'aWFoa2Vs\n'
         self.password = 'Tm9uY2hhbGFudDEx\n'
