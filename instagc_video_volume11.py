@@ -82,8 +82,21 @@ class InstacgVolume11Video(unittest.TestCase):
         sleep(5)
 
     def tap_play(self):
-        sleep(10)
-        self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+        sleep(15)
+        check = False
+        while not check:
+            try:
+                self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+                try:
+                    el = self.driver.find_element(By.TAG_NAME,"iframe")
+                    if el.get_attribute('title') == 'YouTube video player':
+                        break
+                except:
+                    pass
+            except:
+                check = True
+
+        self.driver.switch_to.frame('player')
         el = self.driver.find_element(By.CSS_SELECTOR, 'button.ytp-large-play-button.ytp-button')
         el.click()
         sleep(5)
