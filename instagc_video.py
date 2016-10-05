@@ -57,11 +57,12 @@ class InstacgVideo(unittest.TestCase):
         try:
             """focus on iframe"""
             self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+            el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
         except:
             self.driver.refresh()
             sleep(5)
             self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-        el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
+            el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
         el.click()
 
     def check_playlist_ended(self):
