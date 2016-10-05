@@ -104,7 +104,9 @@ class InstacgInstaGCVideo(unittest.TestCase):
         self.tap_launch_carousel()
         while True:
             sleep(110)
-            self.driver.close()
+            while len(self.driver.window_handles) > 1:
+                self.driver.close()
+                self.switch_window(firstWindow)
             self.switch_window()
             sleep(3700)
             self.driver.refresh()
