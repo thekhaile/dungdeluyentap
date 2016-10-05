@@ -83,6 +83,7 @@ class InstacgVolume11Video(unittest.TestCase):
 
     def tap_play(self):
         sleep(10)
+        self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
         el = self.driver.find_element(By.CSS_SELECTOR, 'button.ytp-large-play-button.ytp-button')
         el.click()
         sleep(5)
@@ -114,6 +115,7 @@ class InstacgVolume11Video(unittest.TestCase):
             except:
                 pass
             sleep(600)
+            self.driver.switch_to.default_content()
             condition = random.randint(0,1)
             if condition:
                 try:
