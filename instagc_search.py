@@ -94,7 +94,7 @@ class InstacgSearch(unittest.TestCase):
 
     def tearDown(self):
         try:
-            self.driver.save_screenshot('/test1.png')
+            self.driver.save_screenshot(str(self.id())+'.png')
         except:
             pass
         finally:
