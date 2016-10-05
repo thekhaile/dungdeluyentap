@@ -6,7 +6,7 @@ from keywords import *
 import random
 from time import sleep
 
-class BingSearch(unittest.TestCase):
+class BingSearchMobile(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Remote(
