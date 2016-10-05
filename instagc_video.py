@@ -82,7 +82,7 @@ class InstacgVideo(unittest.TestCase):
         self.navigate_to_videos()
         while True:
             self.play_video()
-            sleep(5400)
+            sleep(7200)
             self.check_playlist_ended()
 
 
