@@ -54,14 +54,19 @@ class InstacgVideo(unittest.TestCase):
 
     def play_video(self):
         sleep(5)
-        """focus on iframe"""
-        self.driver.switch_to_frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+        try:
+            """focus on iframe"""
+            self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+        except:
+            self.driver.refresh()
+            sleep(5)
+            self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
         el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
         el.click()
 
     def check_playlist_ended(self):
         sleep(5)
-        self.driver.switch_to_default_content()
+        self.driver.switch_to.default_content()
         try:
             el = self.driver.find_element(By.XPATH, '//*[@class="issue" and text()="Playlist has ended. Please refresh to start over."]')
             sleep(3)
