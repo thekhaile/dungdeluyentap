@@ -38,7 +38,7 @@ class BingSearchMobile(unittest.TestCase):
         sleep(5)
 
         """ enter email """
-        el = self.driver.find_element(MobileBy.XPATH, '//input[@type="email"]')
+        el = self.driver.find_element(MobileBy.XPATH, '//input[@type="text"]')
         el.send_keys(self.email.decode('base64','strict'))
         sleep(5)
         """ enter password """
