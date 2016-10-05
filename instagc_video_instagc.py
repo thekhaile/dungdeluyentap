@@ -73,7 +73,8 @@ class InstacgInstaGCVideo(unittest.TestCase):
             for handle in handles:
                 if handle != originalWindow:
                     self.driver.switch_to.window(handle)
-
+        else:
+            self.driver.switch_to.window(self.driver.window_handles[0])
     def tap_launch_carousel(self):
         sleep(5)
         el = self.driver.find_element(By.XPATH, '//button[text()="Launch Carousel"]')
@@ -105,8 +106,8 @@ class InstacgInstaGCVideo(unittest.TestCase):
         while True:
             sleep(110)
             while len(self.driver.window_handles) > 1:
-                self.driver.close()
                 self.switch_window(firstWindow)
+                self.driver.close()
             self.switch_window()
             sleep(3700)
             self.driver.refresh()
