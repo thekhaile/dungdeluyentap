@@ -118,7 +118,7 @@ class BingSearchMobile(unittest.TestCase):
     def test1(self):
         self.dismiss_banner()
         self.log_in()
-        keywords = Keywords().get_keywords()
+        keywords = Keywords().get_keywords(option=2)
 
         for keyword in keywords:
             print keyword
