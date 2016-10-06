@@ -76,11 +76,21 @@ class InstacgVideo(unittest.TestCase):
         except:
             pass
 
+        try:
+            el = self.driver.find_element(By.XPATH, '//*[contains(text(), "inventory has temporarily ran out"]')
+            sleep(3600)
+            self.driver.get('https://www.instagc.com/watch/')
+            sleep(5)
+        except:
+            pass
+
+
 
     def test_video(self):
         self.log_in()
         self.navigate_to_videos()
         while True:
+            self.check_playlist_ended()
             self.play_video()
             sleep(7200)
             self.check_playlist_ended()
