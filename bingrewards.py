@@ -54,12 +54,18 @@ class BingSearch(unittest.TestCase):
         condition = random.randint(0,1)
         if condition:
             try:
-                el = self.driver.find_element(By.XPATH,'//*[@class="b_topTitle"]')
-                el.click()
+                contain = self.driver.find_element(By.XPATH, '//ol[@role="main" and @aria-label="Search Results"]')
+                search = contain.find_element(By.XPATH, '//li[@class="b_algo"]')
+                titleLink = search.find_element(By.TAG_NAME, 'h2')
+                titleLink.click()
                 sleep(10)
                 self.driver.back()
+                if 'https://www.bing.com/search' in self.driver.current_url:
+                    pass
+                else:
+                    self.driver.get('http://www.bing.com/')
             except:
-                pass
+                self.driver.get('http://www.bing.com/')
         else:
             pass
 
@@ -75,7 +81,6 @@ class BingSearch(unittest.TestCase):
             print keyword
             self.search(keyword)
             self.advance_after_search()
-            print self.search_break()
             sleep(self.search_break())
 
 
