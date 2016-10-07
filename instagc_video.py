@@ -70,6 +70,7 @@ class InstacgVideo(unittest.TestCase):
         self.driver.switch_to.default_content()
         try:
             el = self.driver.find_element(By.XPATH, '//*[@class="issue" and text()="Playlist has ended. Please refresh to start over."]')
+            print 'playlist ended'
             sleep(3)
             self.driver.get('https://www.instagc.com/watch/')
             sleep(5)
@@ -78,6 +79,7 @@ class InstacgVideo(unittest.TestCase):
 
         try:
             el = self.driver.find_element(By.XPATH, '//*[contains(text(), "inventory has temporarily ran out"]')
+            print 'Out of inventory'
             sleep(3600)
             self.driver.get('https://www.instagc.com/watch/')
             sleep(5)
