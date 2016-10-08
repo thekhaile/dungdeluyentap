@@ -66,7 +66,19 @@ class BingSearchMobile(unittest.TestCase):
             pass
         else:
             self.driver.execute_script('mobile: tap', location)
+    def getWebViewLocation(self):
+        self.driver.switch_to.context('NATIVE_APP')
+        webView = self.driver.find_element(MobileBy.CLASS_NAME, 'UIAWebView')
+        webLocation = webView.location
+        self.driver.switch_to.context('WEBVIEW_1')
+        return webLocation
 
+    def tap_within_webview(self, webLocation, elementLocation):
+        self.driver.switch_to.context('NATIVE_APP')
+        elementLocation['y'] = webLocation['y'] + elementLocation['y']
+        elementLocation['x'] = webLocation['x'] + elementLocation['x']
+        self.driver.execute_script('mobile: tap', elementLocation)
+        self.driver.switch_to.context('WEBVIEW_1')
 
     def search(self, keyword):
         sleep(10)
@@ -99,15 +111,24 @@ class BingSearchMobile(unittest.TestCase):
             pass
 
     def advance_after_search(self):
+        webLocation = self.getWebViewLocation()
         condition = random.randint(0,1)
         if condition:
             try:
-                el = self.driver.find_element(MobileBy.XPATH,'//a[contains(text(), "News"]')
-                el.click()
-                sleep(10)
+                contain = self.driver.find_element(MobileBy.XPATH, '//ol[@role="main" and @aria-label="Search Results"]')
+                search = contain.find_element(MobileBy.XPATH, '//li[@class="b_algo"]')
+                titleLink = search.find_element(MobileBy.TAG_NAME, 'h2')
+                elementLocation = titleLink.location_once_scrolled_into_view
+                self.tap_within_webview(webLocation, elementLocation)
+                sleep(random.randint(10,20))
                 self.driver.back()
+                sleep(5)
+                if 'https://www.bing.com/search' in self.driver.current_url:
+                    pass
+                else:
+                    self.driver.get('http://www.bing.com/')
             except:
-                pass
+                self.driver.get('http://www.bing.com/')
         else:
             pass
 
