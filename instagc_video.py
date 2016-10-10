@@ -89,6 +89,15 @@ class InstacgVideo(unittest.TestCase):
         except:
             pass
 
+        try:
+            self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+            el = self.driver.find_element(By.CSS_SELECTOR, 'path#thick-spinner-path')
+            print 'Spinning'
+            self.driver.get('https://www.instagc.com/watch/')
+            sleep(5)
+        except:
+            pass
+
 
 
     def test_video(self):
@@ -97,7 +106,7 @@ class InstacgVideo(unittest.TestCase):
         while True:
             self.check_playlist_ended()
             self.play_video()
-            sleep(7200)
+            sleep(120)
             self.check_playlist_ended()
 
 
