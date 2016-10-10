@@ -42,14 +42,15 @@ class InstacgVideo(unittest.TestCase):
 
     def navigate_to_videos(self):
         sleep(5)
-        try:
-            el = self.driver.find_element(By.XPATH, '//span[contains(text(),"Earn")]')
-            el.click()
-            sleep(1)
-        except:
-            pass
-        el = self.driver.find_element(By.XPATH, '//*[contains(text(), "Watch videos")]')
-        el.click()
+        # try:
+        #     el = self.driver.find_element(By.XPATH, '//span[contains(text(),"Earn")]')
+        #     el.click()
+        #     sleep(1)
+        # except:
+        #     pass
+        # el = self.driver.find_element(By.XPATH, '//*[contains(text(), "Watch videos")]')
+        # el.click()
+        self.driver.get('https://www.instagc.com/watch/')
         sleep(5)
 
     def play_video(self):
@@ -57,19 +58,14 @@ class InstacgVideo(unittest.TestCase):
         try:
             """focus on iframe"""
             self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-            try:
-                el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
-            except:
-                el = self.driver.find_element(By.CSS_SELECTOR, 'svg.player-icon')
+                # el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
+            el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
         except:
             self.driver.refresh()
             sleep(5)
             self.check_playlist_ended()
             self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-            try:
-                el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
-            except:
-                el = self.driver.find_element(By.CSS_SELECTOR, 'svg.player-icon')
+            el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
         el.click()
 
     def check_playlist_ended(self):
