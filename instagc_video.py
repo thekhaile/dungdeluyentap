@@ -62,15 +62,16 @@ class InstacgVideo(unittest.TestCase):
         except:
             try:
                 el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
+
             except:
                 self.driver.refresh()
                 sleep(5)
                 self.check_playlist_ended()
-        self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-        try:
-            el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
-        except:
-            el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
+                try:
+                    self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+                    el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
+                except:
+                    el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
         el.click()
 
     def check_playlist_ended(self):
@@ -81,6 +82,7 @@ class InstacgVideo(unittest.TestCase):
             print 'Spinning'
             self.driver.get('https://www.instagc.com/watch/')
             sleep(5)
+            self.driver.switch_to.default_content()
         except:
             try:
                 self.driver.switch_to.default_content()
