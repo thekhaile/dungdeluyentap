@@ -58,37 +58,23 @@ class InstacgVideo(unittest.TestCase):
         try:
             """focus on iframe"""
             self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-                # el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
             el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
         except:
-            self.driver.refresh()
-            sleep(5)
-            self.check_playlist_ended()
-            self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+            try:
+                el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
+            except:
+                self.driver.refresh()
+                sleep(5)
+                self.check_playlist_ended()
+        self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+        try:
             el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
+        except:
+            el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
         el.click()
 
     def check_playlist_ended(self):
         sleep(5)
-        self.driver.switch_to.default_content()
-        try:
-            el = self.driver.find_element(By.XPATH, '//*[@class="issue" and text()="Playlist has ended. Please refresh to start over."]')
-            print 'playlist ended'
-            sleep(3)
-            self.driver.get('https://www.instagc.com/watch/')
-            sleep(5)
-        except:
-            pass
-
-        try:
-            el = self.driver.find_element(By.XPATH, '//*[contains(text(), "inventory has temporarily ran out"]')
-            print 'Out of inventory'
-            sleep(3600)
-            self.driver.get('https://www.instagc.com/watch/')
-            sleep(5)
-        except:
-            pass
-
         try:
             self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
             el = self.driver.find_element(By.CSS_SELECTOR, 'path#thick-spinner-path')
@@ -96,7 +82,23 @@ class InstacgVideo(unittest.TestCase):
             self.driver.get('https://www.instagc.com/watch/')
             sleep(5)
         except:
-            pass
+            try:
+                self.driver.switch_to.default_content()
+                el = self.driver.find_element(By.XPATH, '//*[@class="issue" and text()="Playlist has ended. Please refresh to start over."]')
+                print 'playlist ended'
+                sleep(3)
+                self.driver.get('https://www.instagc.com/watch/')
+                sleep(5)
+            except:
+                try:
+                    self.driver.switch_to.default_content()
+                    el = self.driver.find_element(By.XPATH, '//*[contains(text(), "inventory has temporarily ran out"]')
+                    print 'Out of inventory'
+                    sleep(3600)
+                    self.driver.get('https://www.instagc.com/watch/')
+                    sleep(5)
+                except:
+                    pass
 
 
 
