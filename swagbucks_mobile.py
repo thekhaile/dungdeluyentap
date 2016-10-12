@@ -81,8 +81,11 @@ def main():
                         el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Cancel")')
                         UIType.Button(el).tap()
             for i in range(1):
-                app.swipe_up()
-                sleep(1)
+                try:
+                    app.swipe_up()
+                    sleep(1)
+                except:
+                    pass
             View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
             cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
 
