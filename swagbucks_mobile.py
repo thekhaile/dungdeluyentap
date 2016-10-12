@@ -30,7 +30,7 @@ def main():
 
         sleep(5)
 
-        if app.find_element(MobileBy.ID, 'Open navigation drawer'):
+        if not app.find_element(MobileBy.ID, 'Open navigation drawer'):
             for i in range(3):
                 app.swipe_left()
                 sleep(2)
