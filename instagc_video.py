@@ -110,7 +110,7 @@ class InstacgVideo(unittest.TestCase):
         while True:
             self.check_playlist_ended()
             self.play_video()
-            sleep(120)
+            sleep(600)
             self.check_playlist_ended()
 
 
