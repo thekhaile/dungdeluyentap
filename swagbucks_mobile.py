@@ -59,7 +59,7 @@ def main():
 
     for item in items[5:15]:
         UIType.Button(item).tap()
-        for i in range(2):
+        for i in range(40):
             View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
             cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
             for cell in cells:
@@ -103,4 +103,6 @@ def main():
     View = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/video_recycler_view')
     cell = View.find_element(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
     UIType.Button(cell).tap()
+    while True:
+        continue
 main()
