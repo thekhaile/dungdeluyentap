@@ -19,7 +19,7 @@ def main():
             'fullReset': True,
             'noReset': False
         })
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(5)
     app = Device(driver)
     UIType = Type(driver)
     action = TouchAction(driver)
@@ -28,8 +28,9 @@ def main():
     #     pass
     sleep(5)
 
-    while not app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/register_screen_ButtunLogin'):
+    for i in range(3):
         app.swipe_left()
+        sleep(2)
 
     ###Sign in
     #Navigate to Login
@@ -58,24 +59,31 @@ def main():
 
     for item in items[5:15]:
         UIType.Button(item).tap()
-        for i in range(50):
+        for i in range(2):
             View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
             cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
             for cell in cells:
-                coordinates = cell.location
-                size = cell.size
-                coordinates['x'] = coordinates['x']+ size['width']/2
-                coordinates['y'] = coordinates['y']+ size['height']/2
-                action.long_press(x=coordinates['x'], y=coordinates['y']).perform()
-                sleep(4)
-                #Add to favorites
-                if app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")'):
-                    el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")')
-                    UIType.Button(el).tap()
-                else:
-                    el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Cancel")')
-                    UIType.Button(el).tap()
-            app.swipe_up()
+                try:
+                    el = cell.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
+                    continue
+                except:
+                    coordinates = cell.location
+                    size = cell.size
+                    coordinates['x'] = coordinates['x']+ size['width']/2
+                    coordinates['y'] = coordinates['y']+ size['height']/2
+                    action.long_press(x=coordinates['x'], y=coordinates['y']).perform()
+                    sleep(2)
+                    #Add to favorites
+                    if app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")'):
+                        el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")')
+                        UIType.Button(el).tap()
+                    else:
+                        el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Cancel")')
+                        UIType.Button(el).tap()
+            for i in range(1):
+                app.swipe_up()
+            View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
+            cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
 
             #Tap menu icon
         el = app.find_element(MobileBy.ID, 'Open navigation drawer')
