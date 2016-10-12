@@ -27,28 +27,31 @@ def main():
 
         # if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/welcome_screen_viewPager'):
         #     pass
+
         sleep(5)
 
-        for i in range(3):
-            app.swipe_left()
+        if app.find_element(MobileBy.ID, 'Open navigation drawer'):
+            for i in range(3):
+                app.swipe_left()
+                sleep(2)
+
+            ###Sign in
+            #Navigate to Login
+            el = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/register_screen_ButtunLogin')
+            UIType.Button(el).tap()
+
+            #Enter Email
+            el = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/login_screen_editTextEmail')
+            UIType.TextField(el).enter_text(email.decode('base64', 'strict'))
+
+            #Enter Password
+            el = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/login_screen_editTextPassword')
+            UIType.TextField(el).enter_text(password.decode('base64', 'strict'))
+
+            #Tap login
+            el = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/login_screen_ButonLogin')
+            UIType.Button(el).tap()
             sleep(2)
-
-        ###Sign in
-        #Navigate to Login
-        el = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/register_screen_ButtunLogin')
-        UIType.Button(el).tap()
-
-        #Enter Email
-        el = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/login_screen_editTextEmail')
-        UIType.TextField(el).enter_text(email.decode('base64', 'strict'))
-
-        #Enter Password
-        el = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/login_screen_editTextPassword')
-        UIType.TextField(el).enter_text(password.decode('base64', 'strict'))
-
-        #Tap login
-        el = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/login_screen_ButonLogin')
-        UIType.Button(el).tap()
 
         #Tap menu icon
         el = app.find_element(MobileBy.ID, 'Open navigation drawer')
