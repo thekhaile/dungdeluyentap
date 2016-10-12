@@ -66,7 +66,7 @@ def main():
             for i in range(50):
                 View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
                 cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
-                hearts = View.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
+                hearts = app.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
                 if len(cells) > len(hearts):
                     for cell in cells:
                         try:
