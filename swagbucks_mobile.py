@@ -65,16 +65,18 @@ def main():
             UIType.Button(item).tap()
             for i in range(50):
                 View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
-                cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
+                # cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
+                images = View.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_thumb_imageview')
                 hearts = app.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
-                if len(cells) > len(hearts):
-                    for cell in cells:
+                if (len(images)-len(hearts))>=2:
+                    for image in images:
                         try:
-                            el = cell.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
-                            continue
+                            el = image.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
                         except:
-                            coordinates = cell.location
-                            size = cell.size
+                            el = None
+                        if not el:
+                            coordinates = image.location
+                            size = image.size
                             coordinates['x'] = coordinates['x']+ size['width']/2
                             coordinates['y'] = coordinates['y']+ size['height']/2
                             action.long_press(x=coordinates['x'], y=coordinates['y']).perform()
