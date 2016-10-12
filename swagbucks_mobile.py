@@ -20,7 +20,7 @@ def main():
                 'fullReset': False,
                 'noReset': True
             })
-        driver.implicitly_wait(5)
+        driver.implicitly_wait(10)
         app = Device(driver)
         UIType = Type(driver)
         action = TouchAction(driver)
