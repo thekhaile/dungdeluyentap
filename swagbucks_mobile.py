@@ -99,7 +99,8 @@ def main():
             #Tap menu icon
             el = app.find_element(MobileBy.ID, 'Open navigation drawer')
             UIType.Button(el).tap()
-
+        
+        sleep(2)
         app.swipe_up()
 
         for item in range(5,10):
@@ -139,6 +140,10 @@ def main():
         #Tap menu icon
         el = app.find_element(MobileBy.ID, 'Open navigation drawer')
         UIType.Button(el).tap()
+
+        #Tap swipe down
+        sleep(2)
+        app.swipe_down()
 
         #Tap Favorites
         listView = app.find_element(MobileBy.CLASS_NAME, 'android.widget.ListView')
