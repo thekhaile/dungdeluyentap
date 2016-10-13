@@ -156,6 +156,7 @@ def main():
         UIType.Button(cell).tap()
         while True:
             sleep(3600)
+            print 'tap on screen'
             app.tap_on_screen()
             continue
     except:
