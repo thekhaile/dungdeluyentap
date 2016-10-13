@@ -76,9 +76,12 @@ class InstacgSearch(unittest.TestCase):
                 firstWindow = self.driver.window_handles[0]
                 titleLink.click()
                 sleep(random.randint(5,15))
-                self.switch_window(firstWindow)
-                self.driver.close()
-                self.switch_window()
+                if len(self.driver.window_handles) > 1:
+                    self.switch_window(firstWindow)
+                    self.driver.close()
+                    self.switch_window()
+                else:
+                    self.driver.get('https://www.instagc.com/search/')
             except:
                 self.driver.get('https://www.instagc.com/search/')
         else:
