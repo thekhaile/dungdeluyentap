@@ -155,6 +155,8 @@ def main():
         cell = View.find_element(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
         UIType.Button(cell).tap()
         while True:
+            sleep(3600)
+            app.tap_on_screen()
             continue
     except:
         app.save_screenshot('swagbucks_mobile.png')
