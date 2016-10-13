@@ -42,14 +42,7 @@ class InstacgSearch(unittest.TestCase):
 
     def navigate_to_search(self):
         sleep(5)
-        try:
-            el = self.driver.find_element(By.XPATH, '//span[contains(text(),"Earn")]')
-            el.click()
-            sleep(1)
-        except:
-            pass
-        el = self.driver.find_element(By.XPATH, '//*[contains(text(), "Search the web")]')
-        el.click()
+        self.driver.get('https://www.instagc.com/search/')
         sleep(5)
 
     def search(self, keyword):
@@ -64,20 +57,35 @@ class InstacgSearch(unittest.TestCase):
         el.click()
         sleep(5)
 
+    def switch_window(self, originalWindow=None):
+        handles = self.driver.window_handles
+        if len(handles) > 1:
+            for handle in handles:
+                if handle != originalWindow:
+                    self.driver.switch_to.window(handle)
+        else:
+            self.driver.switch_to.window(handles[0])
     def advance_after_search(self):
         condition = random.randint(0,1)
         if condition:
             try:
-                self.driver.back()
-                if self.driver.current_url != 'https://www.instagc.com/search/':
-                    self.driver.get('https://www.instagc.com/search/')
+                self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+                container = self.driver.find_element(By.CSS_SELECTOR, 'ul.ypaAdUnit')
+                search = container.find_element(By.CSS_SELECTOR, 'li.ypaAdElement.ypaAdSpacing')
+                titleLink = search.find_element(By.CSS_SELECTOR, 'span.ypaAdTitleInner')
+                firstWindow = self.driver.window_handles[0]
+                titleLink.click()
+                sleep(random.randint(5,15))
+                self.switch_window(firstWindow)
+                self.driver.close()
+                self.switch_window()
             except:
-                pass
+                self.driver.get('https://www.instagc.com/search/')
         else:
-            self.driver.refresh()
+            pass
 
     def search_break(self):
-        return random.randint(120, 500)
+        return random.randint(120, 400)
 
     def test_search(self):
         self.log_in()
@@ -87,6 +95,7 @@ class InstacgSearch(unittest.TestCase):
             for keyword in keywords:
                 print keyword
                 self.search(keyword)
+                self.advance_after_search()
                 print self.search_break()
                 sleep(self.search_break())
             keywords = Keywords().get_keywords()
