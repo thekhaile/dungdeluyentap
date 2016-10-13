@@ -154,6 +154,7 @@ def main():
         View = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/video_recycler_view')
         cell = View.find_element(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
         UIType.Button(cell).tap()
+        print 'Video is playing'
         while True:
             sleep(3600)
             print 'tap on screen'
