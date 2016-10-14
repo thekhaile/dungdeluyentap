@@ -53,9 +53,9 @@ def main():
             UIType.Button(el).tap()
             sleep(2)
 
-        # #Tap menu icon
-        # el = app.find_element(MobileBy.ID, 'Open navigation drawer')
-        # UIType.Button(el).tap()
+        #Tap menu icon
+        el = app.find_element(MobileBy.ID, 'Open navigation drawer')
+        UIType.Button(el).tap()
         #
         # #get Listview
         # list = ['Recipes', 'Featured Videos', 'Entertainment', 'Fashion', 'Health', 'Home and Garden', 'Music',
@@ -140,9 +140,6 @@ def main():
         #     el = app.find_element(MobileBy.ID, 'Open navigation drawer')
         #     UIType.Button(el).tap()
 
-        #Tap menu icon : ADDED TO RUN PLAY ALONE
-        el = app.find_element(MobileBy.ID, 'Open navigation drawer')
-        UIType.Button(el).tap()
 
         #Tap swipe down
         sleep(2)
