@@ -140,14 +140,18 @@ class BingSearchMobile(unittest.TestCase):
     def test1(self):
         self.dismiss_banner()
         self.log_in()
-        keywords = Keywords().get_keywords(option=2)
 
-        for keyword in keywords:
-            print keyword
-            self.search(keyword)
-            self.advance_after_search()
-            print self.search_break()
-            sleep(self.search_break())
+        while True:
+            keywords = Keywords().get_keywords(option=2)
+            for keyword in keywords:
+                print keyword
+                self.search(keyword)
+                self.advance_after_search()
+                print self.search_break()
+                sleep(self.search_break())
+            for i in range(13):
+                sleep(random.randint(5400, 6000))
+                self.driver.refresh()
 
 
     def tearDown(self):

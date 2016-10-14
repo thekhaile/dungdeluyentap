@@ -75,14 +75,14 @@ class BingSearch(unittest.TestCase):
 
     def test1(self):
         self.log_in()
-        keywords = Keywords().get_keywords()
-
-        for keyword in keywords:
-            print keyword
-            self.search(keyword)
-            self.advance_after_search()
-            sleep(self.search_break())
-
+        while True:
+            keywords = Keywords().get_keywords()
+            for keyword in keywords:
+                print keyword
+                self.search(keyword)
+                self.advance_after_search()
+                sleep(self.search_break())
+            sleep(random.randint(86400, 87000))
 
     def tearDown(self):
         try:
