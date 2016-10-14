@@ -96,11 +96,14 @@ class InstacgSearch(unittest.TestCase):
         keywords = Keywords().get_keywords()
         while True:
             for keyword in keywords:
-                print keyword
-                self.search(keyword)
-                self.advance_after_search()
-                print self.search_break()
-                sleep(self.search_break())
+                try:
+                    print keyword
+                    self.search(keyword)
+                    self.advance_after_search()
+                    print self.search_break()
+                    sleep(self.search_break())
+                except:
+                    self.navigate_to_search()
             keywords = Keywords().get_keywords()
 
 
