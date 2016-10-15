@@ -130,7 +130,7 @@ def main():
                             else:
                                 el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Cancel")')
                                 UIType.Button(el).tap()
-                for i in range(2):
+                for i in range(1):
                     try:
                         app.swipe_up()
                         sleep(1)
