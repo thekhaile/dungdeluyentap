@@ -20,7 +20,7 @@ def main():
                 'fullReset': False,
                 'noReset': True
             })
-        driver.implicitly_wait(10)
+        driver.implicitly_wait(3)
         app = Device(driver)
         UIType = Type(driver)
         action = TouchAction(driver)
@@ -64,6 +64,7 @@ def main():
 
         for item in range(0,5):
             UIType.Button(app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("%s")' %list[item])).tap()
+            sleep(15)
             for i in range(50):
                 View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
                 # cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
@@ -105,6 +106,7 @@ def main():
 
         for item in range(5,10):
             UIType.Button(app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("%s")' %list[item])).tap()
+            sleep(15)
             for i in range(50):
                 View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
                 # cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
