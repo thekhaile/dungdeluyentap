@@ -158,8 +158,9 @@ def main():
         UIType.Button(cell).tap()
         print 'Video is playing'
         while True:
-            sleep(900)
-            app.tap_on_screen()
+            sleep(1200)
+            print 'Get window size'
+            app.get_window_size()
             continue
     except:
         app.save_screenshot('swagbucks_mobile.png')
