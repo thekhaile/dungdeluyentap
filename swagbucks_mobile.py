@@ -56,91 +56,91 @@ def main():
         #Tap menu icon
         el = app.find_element(MobileBy.ID, 'Open navigation drawer')
         UIType.Button(el).tap()
-
-        #get Listview
-        list = ['Recipes', 'Featured Videos', 'Entertainment', 'Fashion', 'Health', 'Home and Garden', 'Music',
-                'News', 'Travel', 'Celebrity']
-
-
-        for item in range(0,5):
-            UIType.Button(app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("%s")' %list[item])).tap()
-            sleep(15)
-            for i in range(50):
-                View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
-                # cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
-                images = View.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_thumb_imageview')
-                hearts = app.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
-                if (len(images)-len(hearts))>=2:
-                    for image in images:
-                        try:
-                            el = image.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
-                        except:
-                            el = None
-                        if not el:
-                            coordinates = image.location
-                            size = image.size
-                            coordinates['x'] = coordinates['x']+ size['width']/2
-                            coordinates['y'] = coordinates['y']+ size['height']/2
-                            action.long_press(x=coordinates['x'], y=coordinates['y']).perform()
-                            sleep(2)
-                            #Add to favorites
-                            if app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")'):
-                                el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")')
-                                UIType.Button(el).tap()
-                            else:
-                                el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Cancel")')
-                                UIType.Button(el).tap()
-                for i in range(1):
-                    try:
-                        app.swipe_up()
-                        sleep(1)
-                    except:
-                        pass
-
-            #Tap menu icon
-            el = app.find_element(MobileBy.ID, 'Open navigation drawer')
-            UIType.Button(el).tap()
-
-        sleep(2)
-        app.swipe_up()
-
-        for item in range(5,10):
-            UIType.Button(app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("%s")' %list[item])).tap()
-            sleep(15)
-            for i in range(50):
-                View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
-                # cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
-                images = View.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_thumb_imageview')
-                hearts = app.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
-                if (len(images)-len(hearts))>=2:
-                    for image in images:
-                        try:
-                            el = image.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
-                        except:
-                            el = None
-                        if not el:
-                            coordinates = image.location
-                            size = image.size
-                            coordinates['x'] = coordinates['x']+ size['width']/2
-                            coordinates['y'] = coordinates['y']+ size['height']/2
-                            action.long_press(x=coordinates['x'], y=coordinates['y']).perform()
-                            sleep(2)
-                            #Add to favorites
-                            if app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")'):
-                                el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")')
-                                UIType.Button(el).tap()
-                            else:
-                                el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Cancel")')
-                                UIType.Button(el).tap()
-                for i in range(1):
-                    try:
-                        app.swipe_up()
-                        sleep(1)
-                    except:
-                        pass
-            #Tap menu icon
-            el = app.find_element(MobileBy.ID, 'Open navigation drawer')
-            UIType.Button(el).tap()
+        #
+        # #get Listview
+        # list = ['Recipes', 'Featured Videos', 'Entertainment', 'Fashion', 'Health', 'Home and Garden', 'Music',
+        #         'News', 'Travel', 'Celebrity']
+        #
+        #
+        # for item in range(0,5):
+        #     UIType.Button(app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("%s")' %list[item])).tap()
+        #     sleep(15)
+        #     for i in range(50):
+        #         View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
+        #         # cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
+        #         images = View.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_thumb_imageview')
+        #         hearts = app.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
+        #         if (len(images)-len(hearts))>=2:
+        #             for image in images:
+        #                 try:
+        #                     el = image.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
+        #                 except:
+        #                     el = None
+        #                 if not el:
+        #                     coordinates = image.location
+        #                     size = image.size
+        #                     coordinates['x'] = coordinates['x']+ size['width']/2
+        #                     coordinates['y'] = coordinates['y']+ size['height']/2
+        #                     action.long_press(x=coordinates['x'], y=coordinates['y']).perform()
+        #                     sleep(2)
+        #                     #Add to favorites
+        #                     if app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")'):
+        #                         el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")')
+        #                         UIType.Button(el).tap()
+        #                     else:
+        #                         el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Cancel")')
+        #                         UIType.Button(el).tap()
+        #         for i in range(1):
+        #             try:
+        #                 app.swipe_up()
+        #                 sleep(1)
+        #             except:
+        #                 pass
+        #
+        #     #Tap menu icon
+        #     el = app.find_element(MobileBy.ID, 'Open navigation drawer')
+        #     UIType.Button(el).tap()
+        #
+        # sleep(2)
+        # app.swipe_up()
+        #
+        # for item in range(5,10):
+        #     UIType.Button(app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("%s")' %list[item])).tap()
+        #     sleep(15)
+        #     for i in range(50):
+        #         View = app.find_element(MobileBy.CLASS_NAME, 'android.support.v7.widget.RecyclerView')
+        #         # cells = View.find_elements(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
+        #         images = View.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_thumb_imageview')
+        #         hearts = app.find_elements(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
+        #         if (len(images)-len(hearts))>=2:
+        #             for image in images:
+        #                 try:
+        #                     el = image.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/row_video_red_heart_imageview')
+        #                 except:
+        #                     el = None
+        #                 if not el:
+        #                     coordinates = image.location
+        #                     size = image.size
+        #                     coordinates['x'] = coordinates['x']+ size['width']/2
+        #                     coordinates['y'] = coordinates['y']+ size['height']/2
+        #                     action.long_press(x=coordinates['x'], y=coordinates['y']).perform()
+        #                     sleep(2)
+        #                     #Add to favorites
+        #                     if app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")'):
+        #                         el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Add to Favorites")')
+        #                         UIType.Button(el).tap()
+        #                     else:
+        #                         el = app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Cancel")')
+        #                         UIType.Button(el).tap()
+        #         for i in range(1):
+        #             try:
+        #                 app.swipe_up()
+        #                 sleep(1)
+        #             except:
+        #                 pass
+        #     #Tap menu icon
+        #     el = app.find_element(MobileBy.ID, 'Open navigation drawer')
+        #     UIType.Button(el).tap()
 
 
         #Tap swipe down
@@ -159,8 +159,8 @@ def main():
         print 'Video is playing'
         while True:
             sleep(1200)
-            print 'Get window size'
-            app.get_window_size()
+            print 'Keep driver active'
+            app.is_android()
             continue
     except:
         app.save_screenshot('swagbucks_mobile.png')
