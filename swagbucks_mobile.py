@@ -159,8 +159,11 @@ def main():
         print 'Video is playing'
         while True:
             sleep(1200)
-            print 'Keep driver active'
-            app.is_android()
+            if app.find_element(MobileBy.ID, 'omwsContainer55d8bc02c8'):
+                app.tap_hardware_back_key()
+                sleep(3)
+            if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
+                UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
             continue
     except:
         app.save_screenshot('swagbucks_mobile.png')
