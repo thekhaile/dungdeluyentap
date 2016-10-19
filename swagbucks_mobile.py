@@ -158,7 +158,7 @@ def main():
         UIType.Button(cell).tap()
         print 'Video is playing'
         while True:
-            sleep(5400)
+            sleep(600)
             print 'Keep alive'
             app.driver.context
             if app.find_element(MobileBy.ID, 'omwsContainer55d8bc02c8'):
