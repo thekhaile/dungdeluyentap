@@ -151,7 +151,7 @@ class BingSearchMobile(unittest.TestCase):
                 sleep(self.search_break())
             for i in range(13):
                 sleep(random.randint(5400, 6000))
-                self.driver.refresh()
+                self.driver.current_url
 
 
     def tearDown(self):
