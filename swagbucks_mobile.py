@@ -164,8 +164,13 @@ def main():
             if app.find_element(MobileBy.ID, 'omwsContainer55d8bc02c8'):
                 app.tap_hardware_back_key()
                 sleep(3)
-            if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
-                UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
+                if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
+                    UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
+            elif app.find_element(MobileBy.ID, 'viewport'):
+                app.tap_hardware_back_key()
+                sleep(3)
+                if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
+                    UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
             continue
     except:
         app.save_screenshot('swagbucks_mobile.png')
