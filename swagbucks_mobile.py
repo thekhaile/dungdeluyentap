@@ -28,7 +28,7 @@ def main():
         # if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/welcome_screen_viewPager'):
         #     pass
 
-        sleep(5)
+        sleep(15)
 
         if not app.find_element(MobileBy.ID, 'Open navigation drawer'):
             for i in range(3):
