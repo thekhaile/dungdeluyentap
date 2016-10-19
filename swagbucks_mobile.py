@@ -159,6 +159,8 @@ def main():
         print 'Video is playing'
         while True:
             sleep(1200)
+            print 'Keep alive'
+            app.driver.context
             if app.find_element(MobileBy.ID, 'omwsContainer55d8bc02c8'):
                 app.tap_hardware_back_key()
                 sleep(3)
