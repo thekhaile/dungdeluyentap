@@ -184,5 +184,7 @@ def main():
                 continue
         except:
             app.save_screenshot('swagbucks_mobile'+str(count)+'.png')
-        count +=1
+        finally:
+            driver.quit()
+            count +=1
 main()
