@@ -5,6 +5,7 @@ from appium.webdriver.common.mobileby import MobileBy
 from keywords import *
 import random
 from time import sleep
+import os
 
 class BingSearchMobile(unittest.TestCase):
 
@@ -161,3 +162,10 @@ class BingSearchMobile(unittest.TestCase):
             pass
         finally:
             self.driver.quit()
+
+def main():
+    while True:
+        try:
+            os.system('py.test bingrewards_mobile.py -v -s')
+        except:
+            pass
