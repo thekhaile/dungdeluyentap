@@ -169,3 +169,5 @@ def main():
             os.system('py.test bingrewards_mobile.py -v -s')
         except:
             pass
+
+main()
