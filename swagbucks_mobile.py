@@ -189,7 +189,7 @@ def main():
                 if not (app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play') and
                                 app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/pause')):
                     sleep(15)
-                    'Encountered error screen'
+                    print 'Encountered error screen'
                     app.tap_hardware_back_key()
                     sleep(3)
                     if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
