@@ -23,6 +23,8 @@ def main():
                     'noReset': True
                 })
             driver.implicitly_wait(15)
+            global app
+            global UIType
             app = Device(driver)
             UIType = Type(driver)
             action = TouchAction(driver)
@@ -55,9 +57,9 @@ def main():
                 UIType.Button(el).tap()
                 sleep(2)
 
-            #Tap menu icon
-            el = app.find_element(MobileBy.ID, 'Open navigation drawer')
-            UIType.Button(el).tap()
+            # #Tap menu icon
+            # el = app.find_element(MobileBy.ID, 'Open navigation drawer')
+            # UIType.Button(el).tap()
             #
             # #get Listview
             # list = ['Recipes', 'Featured Videos', 'Entertainment', 'Fashion', 'Health', 'Home and Garden', 'Music',
@@ -143,21 +145,8 @@ def main():
             #     #Tap menu icon
             #     el = app.find_element(MobileBy.ID, 'Open navigation drawer')
             #     UIType.Button(el).tap()
-
-
-            #Tap swipe down
-            sleep(2)
-            app.swipe_down()
-
-            #Tap Favorites
-            listView = app.find_element(MobileBy.CLASS_NAME, 'android.widget.ListView')
-            items = listView.find_elements(MobileBy.CLASS_NAME, 'android.widget.RelativeLayout')
-            item = items[3]
-            UIType.Button(item).tap()
-
-            View = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/video_recycler_view')
-            cell = View.find_element(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
-            UIType.Button(cell).tap()
+            go_to_favorites()
+            tap_video_cell()
             print 'Video is playing'
             while True:
                 sleep(600)
@@ -188,15 +177,65 @@ def main():
                 #         assert 'Black screen'
                 if not (app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play') and
                                 app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/pause')):
-                    sleep(15)
-                    print 'Encountered error screen'
-                    app.tap_hardware_back_key()
-                    sleep(3)
-                    if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
-                        UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
+                    print ' play and pause not found'
+                    if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/i_m_previous_textview'):
+                        print 'It is on autoplay screen'
+                        continue
+                    else:
+                        sleep(15)
+                        print 'Encountered error screen'
+                        app.tap_hardware_back_key()
+                        sleep(3)
+                        if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
+                            print 'encountered play button'
+                            UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
+
+
+                        elif app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Are you sure'
+                                                                      ' you want to quit the application?")'):
+                            print 'cancel out sign out and go to Favorites again'
+                            UIType.Button(app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Cancel")')).tap()
+                            go_to_favorites()
+                            tap_video_cell()
+
+                        elif app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/pause'):
+                            print 'encountered pause button'
+                            continue
+
+                        else:
+                            print 'back to sign out to start the playlist all over'
+                            for i in range(5):
+                                app.tap_hardware_back_key()
+                            UIType.Button(app.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'text("Cancel")')).tap()
+                            go_to_favorites()
+                            tap_video_cell()
+
         except:
             app.save_screenshot('swagbucks_mobile'+str(count)+'.png')
         finally:
             driver.quit()
             count +=1
+
+def go_to_favorites():
+    #Tap menu icon
+    el = app.find_element(MobileBy.ID, 'Open navigation drawer')
+    UIType.Button(el).tap()
+
+    #Swipe down
+    sleep(2)
+    app.swipe_down()
+
+    #Tap Favorites
+    listView = app.find_element(MobileBy.CLASS_NAME, 'android.widget.ListView')
+    items = listView.find_elements(MobileBy.CLASS_NAME, 'android.widget.RelativeLayout')
+    item = items[3]
+    UIType.Button(item).tap()
+    sleep(10)
+
+def tap_video_cell():
+    View = app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/video_recycler_view')
+    cell = View.find_element(MobileBy.CLASS_NAME, 'android.widget.FrameLayout')
+    UIType.Button(cell).tap()
+
+
 main()
