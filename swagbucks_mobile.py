@@ -22,7 +22,7 @@ def main():
                     'fullReset': False,
                     'noReset': True
                 })
-            driver.implicitly_wait(10)
+            driver.implicitly_wait(15)
             app = Device(driver)
             UIType = Type(driver)
             action = TouchAction(driver)
@@ -162,26 +162,37 @@ def main():
             while True:
                 sleep(600)
                 print 'Keep alive'
-                app.driver.context
-                if app.find_element(MobileBy.ID, 'omwsContainer55d8bc02c8'):
-                    print 'encountering Rotate device'
+                # if app.find_element(MobileBy.ID, 'omwsContainer55d8bc02c8'):
+                #     print 'encountering Rotate device'
+                #     app.tap_hardware_back_key()
+                #     sleep(3)
+                #     if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
+                #         UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
+                # elif app.find_element(MobileBy.ID, 'viewport'):
+                #     print 'encountering spinner and x'
+                #     app.tap_hardware_back_key()
+                #     sleep(3)
+                #     if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
+                #         UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
+                # elif app.find_element(MobileBy.ID, 'closeButton') or app.find_element(MobileBy.ID, 'endCardReplay'):
+                #     print 'encountering End Card Replay'
+                #     app.tap_hardware_back_key()
+                #     sleep(3)
+                #     if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
+                #         UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
+                # else:
+                #     sleep(15)
+                #     app.tap_on_screen()
+                #     if not (app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play') or
+                #                 app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/pause')):
+                #         assert 'Black screen'
+                if not (app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play') and
+                                app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/pause')):
+                    sleep(15)
                     app.tap_hardware_back_key()
                     sleep(3)
                     if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
                         UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
-                elif app.find_element(MobileBy.ID, 'viewport'):
-                    print 'encountering spinner and x'
-                    app.tap_hardware_back_key()
-                    sleep(3)
-                    if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
-                        UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
-                elif app.find_element(MobileBy.ID, 'closeButton') or app.find_element(MobileBy.ID, 'endCardReplay'):
-                    print 'encountering End Card Replay'
-                    app.tap_hardware_back_key()
-                    sleep(3)
-                    if app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play'):
-                        UIType.Button(app.find_element(MobileBy.ID, 'com.swagbuckstvmobile.views:id/play')).tap()
-                continue
         except:
             app.save_screenshot('swagbucks_mobile'+str(count)+'.png')
         finally:
