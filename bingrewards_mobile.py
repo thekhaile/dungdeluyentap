@@ -143,15 +143,18 @@ class BingSearchMobile(unittest.TestCase):
         self.log_in()
 
         while True:
-            keywords = Keywords().get_keywords(option=2)
-            for keyword in keywords:
-                print keyword
-                self.search(keyword)
-                self.advance_after_search()
-                print self.search_break()
-                sleep(self.search_break())
-            for i in range(13):
-                sleep(random.randint(5400, 6000))
+            try:
+                keywords = Keywords().get_keywords(option=2)
+                for keyword in keywords:
+                    print keyword
+                    self.search(keyword)
+                    self.advance_after_search()
+                    print self.search_break()
+                    sleep(self.search_break())
+                for i in range(13):
+                    sleep(random.randint(5400, 6000))
+                    self.driver.current_url
+            except:
                 self.driver.current_url
 
 
@@ -163,11 +166,11 @@ class BingSearchMobile(unittest.TestCase):
         finally:
             self.driver.quit()
 
-def main():
-    while True:
-        try:
-            os.system('py.test bingrewards_mobile.py -v -s')
-        except:
-            pass
-
-main()
+# def main():
+#     while True:
+#         try:
+#             os.system('py.test bingrewards_mobile.py -v -s')
+#         except:
+#             pass
+#
+# main()
