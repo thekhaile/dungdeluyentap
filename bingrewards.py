@@ -77,11 +77,14 @@ class BingSearch(unittest.TestCase):
         self.log_in()
         while True:
             keywords = Keywords().get_keywords()
-            for keyword in keywords:
-                print keyword
-                self.search(keyword)
-                self.advance_after_search()
-                sleep(self.search_break())
+            try:
+                for keyword in keywords:
+                    print keyword
+                    self.search(keyword)
+                    self.advance_after_search()
+                    sleep(self.search_break())
+            except:
+                self.driver.get('http://www.bing.com/')
             sleep(random.randint(86400, 87000))
 
     def tearDown(self):
