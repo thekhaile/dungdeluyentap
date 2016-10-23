@@ -18,7 +18,7 @@ class BingSearchMobile(unittest.TestCase):
                 'platformVersion': '9.2',
                 'deviceName': 'iPhone 5s',
                 'newCommandTimeout': "7200",
-                'launchTimeout': '300000',
+                'launchTimeout': '400000',
                 'fullReset': True,
                 'noReset': False
             })
