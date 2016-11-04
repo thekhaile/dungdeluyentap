@@ -88,7 +88,7 @@ class InstacgSearch(unittest.TestCase):
             pass
 
     def search_break(self):
-        return random.randint(120, 400)
+        return random.randint(60, 100)
 
     def test_search(self):
         self.log_in()
