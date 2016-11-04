@@ -88,7 +88,7 @@ class InstacgSearch(unittest.TestCase):
             pass
 
     def search_break(self):
-        return random.randint(60, 100)
+        return random.randint(110, 300)
 
     def test_search(self):
         self.log_in()
@@ -99,7 +99,7 @@ class InstacgSearch(unittest.TestCase):
                 try:
                     print keyword
                     self.search(keyword)
-                    self.advance_after_search()
+                    # self.advance_after_search()
                     print self.search_break()
                     sleep(self.search_break())
                 except:
