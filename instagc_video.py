@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from keywords import *
 import random
 from time import sleep
+from common import *
 
 class InstacgVideo(unittest.TestCase):
 
@@ -13,6 +14,7 @@ class InstacgVideo(unittest.TestCase):
         self.driver.get('https://www.instagc.com/users/login')
         self.email = 'aWFoa2Vs\n'
         self.password = 'Tm9uY2hhbGFudDEx\n'
+        self.app = Device(self.driver)
 
     def log_in(self):
         sleep(10)
@@ -55,33 +57,26 @@ class InstacgVideo(unittest.TestCase):
 
     def play_video(self):
         sleep(5)
-        try:
-            """focus on iframe"""
-            self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-            el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
-        except:
-            try:
-                el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
 
+        el = None
+        while not el:
+            try:
+                """focus on iframe"""
+                self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+                el = self.app.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
             except:
-                self.driver.refresh()
-                sleep(10)
-                self.check_playlist_ended()
                 try:
-                    self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-                    el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
+                    el = self.app.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
+
                 except:
+                    self.driver.refresh()
+                    sleep(10)
+                    self.check_playlist_ended()
                     try:
-                        el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
+                        self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+                        el = self.app.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
                     except:
-                        self.driver.refresh()
-                        sleep(10)
-                        self.check_playlist_ended()
-                        try:
-                            self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-                            el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-poster-play-icon.poster-control')
-                        except:
-                            el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
+                        el = self.app.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
         el.click()
 
     def check_playlist_ended(self):
