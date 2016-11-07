@@ -81,36 +81,32 @@ class InstacgVideo(unittest.TestCase):
 
     def check_playlist_ended(self):
         sleep(5)
-        if self.app.find_element(By.CSS_SELECTOR, 'div.play-button-state.playing-state'):
-            pass
-        else:
-            try:
-                self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-                el = self.driver.find_element(By.CSS_SELECTOR, 'path#thick-spinner-path')
+        self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+        if self.app.find_element(By.CLASS_NAME, 'video-duration'):
+            duration = self.app.find_element(By.CLASS_NAME, 'video-duration').text
+            progress = self.app.find_element(By.CLASS_NAME, 'video-progress-time').text
+            if duration == progress:
                 print 'Spinning'
                 self.driver.get('https://www.instagc.com/watch/')
                 sleep(5)
                 self.driver.switch_to.default_content()
-            except:
-                try:
-                    self.driver.switch_to.default_content()
-                    el = self.driver.find_element(By.XPATH, '//*[@class="issue" and text()="Playlist has ended. Please refresh to start over."]')
-                    print 'playlist ended'
-                    sleep(3)
-                    self.driver.get('https://www.instagc.com/watch/')
-                    sleep(5)
-                except:
-                    try:
-                        self.driver.switch_to.default_content()
-                        el = self.driver.find_element(By.XPATH, '//*[contains(text(), "inventory has temporarily ran out"]')
-                        print 'Out of inventory'
-                        sleep(3600)
-                        self.driver.get('https://www.instagc.com/watch/')
-                        sleep(5)
-                    except:
-                        pass
 
-
+        elif self.app.find_element(By.XPATH, '//*[@class="issue" and text()="Playlist has ended. Please refresh to start over."]'):
+            print 'playlist ended'
+            sleep(3)
+            self.driver.get('https://www.instagc.com/watch/')
+            sleep(5)
+            self.driver.switch_to.default_content()
+        elif self.app.find_element(By.XPATH, '//*[contains(text(), "inventory has temporarily ran out"]'):
+            print 'Out of inventory'
+            sleep(3600)
+            self.driver.get('https://www.instagc.com/watch/')
+            sleep(5)
+            self.driver.switch_to.default_content()
+        else:
+            self.driver.get('https://www.instagc.com/watch/')
+            sleep(5)
+            self.driver.switch_to.default_content()
 
     def test_video(self):
         self.log_in()
