@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from keywords import *
 import random
 from time import sleep
+from common import *
 
 class InstacgVideo(unittest.TestCase):
 
@@ -13,6 +14,7 @@ class InstacgVideo(unittest.TestCase):
         self.driver.get('https://www.instagc.com/users/login')
         self.email = 'aWFoa2Vs\n'
         self.password = 'Tm9uY2hhbGFudDEx\n'
+        self.app = Device(self.driver)
 
     def log_in(self):
         sleep(10)
