@@ -55,6 +55,10 @@ class InstacgVideo(unittest.TestCase):
         self.driver.get('https://www.instagc.com/watch/')
         sleep(5)
 
+    def choose_playlist(self):
+        el = self.driver.find_element(By.CLASS_NAME, 'playlist-show')
+        el.click()
+        sleep(3)
     def play_video(self):
         sleep(5)
         try:
@@ -80,11 +84,17 @@ class InstacgVideo(unittest.TestCase):
         sleep(5)
         try:
             self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-            el = self.driver.find_element(By.CSS_SELECTOR, 'path#thick-spinner-path')
-            print 'Spinning'
-            self.driver.get('https://www.instagc.com/watch/')
-            sleep(5)
-            self.driver.switch_to.default_content()
+            if self.app.find_element(By.CLASS_NAME, 'video-duration'):
+                for i in range(2):
+                    duration = self.app.find_element(By.CLASS_NAME, 'video-duration').text
+                    progress = self.app.find_element(By.CLASS_NAME, 'video-progress-time').text
+                    sleep(2)
+                if duration == progress:
+                    print 'Spinning'
+                self.driver.get('https://www.instagc.com/watch/')
+                sleep(5)
+                self.choose_playlist()
+                self.driver.switch_to.default_content()
         except:
             try:
                 self.driver.switch_to.default_content()
@@ -93,6 +103,8 @@ class InstacgVideo(unittest.TestCase):
                 sleep(3)
                 self.driver.get('https://www.instagc.com/watch/')
                 sleep(5)
+                self.choose_playlist()
+                self.driver.switch_to.default_content()
             except:
                 try:
                     self.driver.switch_to.default_content()
@@ -101,6 +113,8 @@ class InstacgVideo(unittest.TestCase):
                     sleep(3600)
                     self.driver.get('https://www.instagc.com/watch/')
                     sleep(5)
+                    self.choose_playlist()
+                    self.driver.switch_to.default_content()
                 except:
                     pass
 
@@ -109,9 +123,10 @@ class InstacgVideo(unittest.TestCase):
     def test_video(self):
         self.log_in()
         self.navigate_to_videos()
+        self.choose_playlist()
         while True:
             self.check_playlist_ended()
-            self.play_video()
+            # self.play_video()
             sleep(600)
             self.check_playlist_ended()
 
