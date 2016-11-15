@@ -56,7 +56,9 @@ class InstacgVideo(unittest.TestCase):
         sleep(5)
 
     def choose_playlist(self):
-        el = self.driver.find_element(By.CLASS_NAME, 'playlist-show')
+        n = random.randint(0,2)
+        els = self.driver.find_elements(By.CLASS_NAME, 'playlist-show')
+        el = els[n]
         el.click()
         sleep(3)
     def play_video(self):
@@ -91,10 +93,12 @@ class InstacgVideo(unittest.TestCase):
                     sleep(2)
                 if duration == progress:
                     print 'Spinning'
-                self.driver.get('https://www.instagc.com/watch/')
-                sleep(5)
-                self.choose_playlist()
-                self.driver.switch_to.default_content()
+                    print 'navigate to watch'
+                    self.driver.get('https://www.instagc.com/watch/')
+                    sleep(5)
+                    print 'Open playlist'
+                    self.choose_playlist()
+                    self.driver.switch_to.default_content()
         except:
             try:
                 self.driver.switch_to.default_content()
