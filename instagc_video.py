@@ -82,23 +82,39 @@ class InstacgVideo(unittest.TestCase):
                     el = self.driver.find_element(By.CSS_SELECTOR, 'div.skin5-play-poster-play-icon.skin5-play-poster-control')
         el.click()
 
+
     def check_playlist_ended(self):
         sleep(5)
         try:
-            self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
-            if self.app.find_element(By.CLASS_NAME, 'video-duration'):
-                for i in range(2):
-                    duration = self.app.find_element(By.CLASS_NAME, 'video-duration').text
-                    progress = self.app.find_element(By.CLASS_NAME, 'video-progress-time').text
-                    sleep(2)
-                if duration == progress:
-                    print 'Spinning'
-                    print 'navigate to watch'
-                    self.driver.get('https://www.instagc.com/watch/')
-                    sleep(5)
-                    print 'Open playlist'
-                    self.choose_playlist()
-                    self.driver.switch_to.default_content()
+            before_count = self.app.find_element(By.ID,'watch-progress').text
+            print before_count
+            sleep(600)
+            after_count = self.app.find_element(By.ID,'watch-progress').text
+            print after_count
+            if before_count == after_count:
+                print 'Video watching is not being counted'
+                print 'navigate to watch'
+                self.driver.get('https://www.instagc.com/watch/')
+                sleep(5)
+                print 'Open playlist'
+                self.choose_playlist()
+                self.driver.switch_to.default_content()
+
+        # try:
+        #     self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME,"iframe"))
+        #     if self.app.find_element(By.CLASS_NAME, 'video-duration'):
+        #         for i in range(2):
+        #             duration = self.app.find_element(By.CLASS_NAME, 'video-duration').text
+        #             progress = self.app.find_element(By.CLASS_NAME, 'video-progress-time').text
+        #             sleep(2)
+        #         if duration == progress:
+        #             print 'Spinning'
+        #             print 'navigate to watch'
+        #             self.driver.get('https://www.instagc.com/watch/')
+        #             sleep(5)
+        #             print 'Open playlist'
+        #             self.choose_playlist()
+        #             self.driver.switch_to.default_content()
         except:
             try:
                 self.driver.switch_to.default_content()
@@ -131,8 +147,8 @@ class InstacgVideo(unittest.TestCase):
         while True:
             self.check_playlist_ended()
             # self.play_video()
-            sleep(600)
-            self.check_playlist_ended()
+            # sleep(600)
+            # self.check_playlist_ended()
 
 
     def tearDown(self):
