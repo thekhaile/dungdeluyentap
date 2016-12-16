@@ -10,34 +10,45 @@ class BingSearch(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.get('http://www.bing.com/')
+        self.driver.get('https://login.live.com/')
         self.email = 'a2hhaS5sZWhAaG90bWFpbC5jb20=\n'
         self.password = 'Tm9uY2hhbGFudDEx\n'
 
     def log_in(self):
         sleep(10)
-        """ click sign in """
-        el = self.driver.find_element(By.XPATH, '//*[contains(text(), "Sign in")]')
-        el.click()
-
-        sleep(5)
-
-        """ click connect """
-        el = self.driver.find_element(By.XPATH, '//*[@class ="id_link_text" and contains(text(), "Connect")]')
-        el.click()
-        sleep(5)
+        # """ click sign in """
+        # el = self.driver.find_element(By.XPATH, '//*[contains(text(), "Sign in")]')
+        # el.click()
+        #
+        # sleep(5)
+        #
+        # """ click connect """
+        # el = self.driver.find_element(By.XPATH, '//*[@class ="id_link_text" and contains(text(), "Connect")]')
+        # el.click()
+        # sleep(5)
         """ enter email """
         el = self.driver.find_element(By.XPATH, '//input[@type="email"]')
         el.send_keys(self.email.decode('base64','strict'))
         sleep(5)
+
+        """ tap Next"""
+        el = self.driver.find_element(By.XPATH, '//input[@type="submit"]')
+        el.click()
+        sleep(5)
+
         """ enter password """
         el = self.driver.find_element(By.XPATH, '//input[@type="password"]')
         el.send_keys(self.password.decode('base64','strict'))
         sleep(5)
+
         """ sign in """
         el = self.driver.find_element(By.XPATH, '//input[@type="submit"]')
         el.click()
         sleep(5)
+
+    def navigate_to_bing(self):
+        self.driver.get('https://bing.com/')
+
     def search(self, keyword):
         sleep(10)
         """ enter keyword """
@@ -75,6 +86,7 @@ class BingSearch(unittest.TestCase):
 
     def test1(self):
         self.log_in()
+        self.navigate_to_bing()
         while True:
             keywords = Keywords().get_keywords()
             try:
